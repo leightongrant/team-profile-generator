@@ -3,11 +3,12 @@
     "version": "1.0.0",
     "description": "This application will take in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person.",
     "main": "index.js",
+    "type": "module",
     "directories": {
         "lib": "lib"
     },
     "scripts": {
-        "test": "jest"
+        "test": "node --experimental-vm-modules ./node_modules/.bin/jest"
     },
     "repository": {
         "type": "git",
