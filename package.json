@@ -1,23 +1,26 @@
 {
-  "name": "team-profile-generator",
-  "version": "1.0.0",
-  "description": "This application will take in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person.",
-  "main": "index.js",
-  "directories": {
-    "lib": "lib"
-  },
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/misterouija/team-profile-generator.git"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/misterouija/team-profile-generator/issues"
-  },
-  "homepage": "https://github.com/misterouija/team-profile-generator#readme"
+    "name": "team-profile-generator",
+    "version": "1.0.0",
+    "description": "This application will take in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person.",
+    "main": "index.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "scripts": {
+        "test": "jest"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/misterouija/team-profile-generator.git"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/misterouija/team-profile-generator/issues"
+    },
+    "homepage": "https://github.com/misterouija/team-profile-generator#readme",
+    "devDependencies": {
+        "jest": "^29.4.3"
+    }
 }
