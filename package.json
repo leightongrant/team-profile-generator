@@ -23,5 +23,8 @@
     "homepage": "https://github.com/misterouija/team-profile-generator#readme",
     "devDependencies": {
         "jest": "^29.4.3"
+    },
+    "dependencies": {
+        "fs-extra": "^11.1.0"
     }
 }
