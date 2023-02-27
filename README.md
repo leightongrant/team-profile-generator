@@ -37,7 +37,7 @@ Follow the steps below to use the app
 -   Type: `node index.js`
 -   Follow the prompts to add employees
 -   Enter required information
--   Check output folder for newly generated team.hmtl
+-   Check `output` folder for newly generated `team.hmtl`
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
