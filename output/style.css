@@ -1,0 +1,41 @@
+:root {
+    --clr1: #8ecae6;
+    --clr2: #219ebc;
+    --clr3: #023047;
+    --clr4: #ffb703;
+    --clr5: #fb8500;
+}
+
+.bg-clr5 {
+    background-color: var(--clr5);
+}
+.fc-clr5 {
+    color: var(--clr5);
+}
+.bg-man {
+    background-color: var(--clr2);
+}
+.bg-eng {
+    background-color: var(--clr1);
+}
+.bg-int {
+    background-color: var(--clr4);
+}
+.border-man {
+    border-color: var(--clr2);
+}
+
+.border-eng {
+    border-color: var(--clr1);
+}
+
+.border-int {
+    border-color: var(--clr4);
+}
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+h1 {
+    font-weight: 900;
+}
