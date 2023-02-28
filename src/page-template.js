@@ -136,7 +136,7 @@ const render = (team) => {
                     </section>
                 </main>
                 <footer class="bg-dark bg-gradient">
-                    <p class="text-center text-light">© 2023, ${manager.getRole()}: ${manager.getName()}, ${manager.getEmail()} </p>
+                    <p class="text-center text-light">© 2023</p>
                 </footer>
             
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
