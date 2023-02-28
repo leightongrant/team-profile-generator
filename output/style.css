@@ -1,66 +1,110 @@
 :root {
-    --clr1: #8ecae6;
-    --clr2: #219ebc;
-    --clr3: #023047;
-    --clr4: #ffb703;
-    --clr5: #fb8500;
+    --clr1: #0466c8;
+    --clr2: #0353a4;
+    --clr3: #023e7d;
+    --clr4: #002855;
+    --clr5: #001845;
+    --clr6: #001233;
+    --clr7: #33415c;
+    --clr8: #5c677d;
+    --clr9: #7d8597;
+    --clr10: #979dac;
+    --clr11: #ffffff;
 }
 
-/* :root {
-    --clr1: #5f0f40;
-    --clr2: #9a031e;
-    --clr3: #fb8b24;
-    --clr4: #e36414;
-    --clr5: #0f4c5c;
+@import url('https://fonts.googleapis.com/css2?family=Jost:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+/* General */
+h1 {
+    font-weight: 900;
+    color: var(--clr10) !important;
+}
+header {
+    background-color: var(--clr5) !important;
+}
+footer {
+    background-color: var(--clr5) !important;
+    color: var(--clr10) !important;
+}
+footer p {
+    margin-bottom: 0 !important;
 }
 
-:root {
-    --clr1: #0f4c5c;
-    --clr2: #219ebc;
-    --clr3: #023047;
-    --clr4: #ffb703;
-    --clr5: #fb8500;
-} */
+main {
+    min-height: calc(100vh - 160px);
+}
 
+body {
+    font-family: 'Jost', sans-serif;
+    background-color: var(--clr10) !important;
+}
+
+h2 {
+    font-size: x-large;
+}
+
+h3 {
+    font-size: medium !important;
+}
+h3 i {
+    font-size: xx-large !important;
+    color: var(--clr10);
+}
+
+a {
+    color: var(--clr1);
+    font-size: small;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+a:hover {
+    color: var(--clr7);
+}
+
+a:active {
+    color: var(--clr6);
+}
+
+/* Color Classes */
 .bg-clr5 {
     background-color: var(--clr5);
 }
 .fc-clr5 {
     color: var(--clr5);
 }
+
 .bg-man {
-    background-color: var(--clr3);
+    background-color: var(--clr4);
 }
 .bg-eng {
-    background-color: var(--clr1);
+    background-color: var(--clr7);
 }
 .bg-int {
-    background-color: var(--clr2);
+    background-color: var(--clr8);
 }
 .border-man {
-    border-color: var(--clr3);
+    border-color: var(--clr4);
 }
 
 .border-eng {
-    border-color: var(--clr1);
+    border-color: var(--clr7);
 }
 
 .border-int {
-    border-color: var(--clr2);
+    border-color: var(--clr8);
 }
 
-body {
-    font-family: 'Roboto', sans-serif;
-}
-h1 {
-    font-weight: 900;
-    color: white !important;
+/* Cards */
+.card-body {
+    background: rgba(0, 0, 0, 0.2);
 }
 
-footer p {
-    margin-bottom: 0 !important;
+.employee-card {
+    box-shadow: 4px 4px 10px #001233;
 }
 
-main {
-    min-height: calc(100vh - 176px);
+.team-area {
+    display: flex;
+    justify-content: center;
+    flex: 1;
 }
