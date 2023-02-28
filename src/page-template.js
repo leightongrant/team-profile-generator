@@ -120,7 +120,7 @@ const render = (team) => {
             <header class="container-fluid bg-gradient">
                 <div class="row">
                     <div class="col jumbotron py-4 team-heading">
-                    <i class="fa-solid fa-users-line"></i>  <h1 class="text-center"> My Team</h1>
+                      <h1 class="text-center"><i class="fa-solid fa-users-line"></i> My Team</h1>
                     </div>
                 </div>
             </header>
