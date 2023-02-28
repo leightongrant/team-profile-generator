@@ -9,12 +9,10 @@ import inquirer from 'inquirer';
 
 // Gather information about the development team members, and render the HTML file.
 
-// Team Array
-const team = [];
-
 // Validations
 const validateEmail = (email) => {
-    const re = /^[A-Z0-9._%+-]+@[A-Z0-9-]+\.[A-Z]{2,4}$/i;
+    const re =
+        /^[A-Z0-9._%+-]+@[A-Z0-9-]+\.([a-z]{2}.[a-z]{2}|[a-z]{3}|[a-z]{2})$/i;
     return re.test(email) || 'Please enter a valid email address';
 };
 
@@ -44,52 +42,74 @@ const validateGithubUsername = (github) => {
 };
 
 // Questions
-const name = {
-    type: 'input',
-    name: 'name',
-    message: 'Name: ',
-    validate: validateName,
-};
-const id = {
-    type: 'input',
-    name: 'id',
-    message: 'ID: ',
-    validate: validateId,
-};
 
-const email = {
-    type: 'input',
-    name: 'email',
-    message: 'Email: ',
-    validate: validateEmail,
-};
-
-const employeeSpecificInput = [
+const managerQuestions = [
     {
         type: 'input',
-        name: 'thisInput',
+        name: 'name',
+        message: 'Manager Name: ',
+        validate: validateName,
+    },
+    {
+        type: 'input',
+        name: 'id',
+        message: 'ID: ',
+        validate: validateId,
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'Email: ',
+        validate: validateEmail,
+    },
+    {
+        type: 'input',
+        name: 'officeNumber',
         message: 'Office Number: ',
         validate: validateOfficeNumber,
     },
+];
+
+const questions = [
     {
         type: 'input',
-        name: 'thisInput',
-        message: 'Github Username: ',
-        validate: validateGithubUsername,
+        name: 'name',
+        message: 'Name: ',
+        validate: validateName,
     },
     {
         type: 'input',
-        name: 'thisInput',
-        message: 'School: ',
-        validate: validateSchool,
+        name: 'id',
+        message: 'ID: ',
+        validate: validateId,
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'Email: ',
+        validate: validateEmail,
     },
 ];
+
+const github = {
+    type: 'input',
+    name: 'github',
+    message: 'Github Username: ',
+    validate: validateGithubUsername,
+};
+
+const school = {
+    type: 'input',
+    name: 'school',
+    message: 'School: ',
+    validate: validateSchool,
+};
 
 const employeeChoice = {
     type: 'list',
     name: 'employee',
-    message: 'Choose employee type ?',
-    choices: ['Manager', 'Engineer', 'Intern'],
+    message: 'Choose type of employee ?',
+    choices: ['Engineer', 'Intern'],
     default: 0,
 };
 
@@ -100,70 +120,74 @@ const askAgain = {
     default: true,
 };
 
-// Prompts
-function ask() {
-    // Prompt for employee type
-    inquirer.prompt([employeeChoice]).then((choice) => {
-        let thisInput;
-        if (choice.employee === 'Manager') {
-            thisInput = employeeSpecificInput[0];
-        } else if (choice.employee === 'Engineer') {
-            thisInput = employeeSpecificInput[1];
-        } else if (choice.employee === 'Intern') {
-            thisInput = employeeSpecificInput[2];
-        }
-        // Prompts for chosen employee type
-        inquirer.prompt([name, id, email, thisInput, askAgain]).then((ans) => {
-            // Create objects
-            let teamMember;
-            if (choice.employee === 'Manager') {
-                teamMember = new Manager(
-                    ans.name,
-                    ans.id,
-                    ans.email,
-                    ans.thisInput
-                );
-            } else if (choice.employee === 'Engineer') {
-                teamMember = new Engineer(
-                    ans.name,
-                    ans.id,
-                    ans.email,
-                    ans.thisInput
-                );
-            } else if (choice.employee === 'Intern') {
-                teamMember = new Intern(
-                    ans.name,
-                    ans.id,
-                    ans.email,
-                    ans.thisInput
-                );
-            }
+// Team Array to store team members
+const team = [];
 
-            // Add objects to array
-            team.push(teamMember);
-
-            // Ask for more employees
-            if (ans.askAgain) {
-                ask();
-            } else {
-                // Call render
-                console.log('Rendering HTML ....');
-                const output = render(team);
-
-                // Create File Path
-                const OUTPUT_DIR = resolve('', 'output');
-                const outputPath = join(OUTPUT_DIR, 'team.html');
-
-                // Write file
-                setTimeout(() => {
-                    fs.outputFile(outputPath, output, (err) => {
-                        if (err) console.log(err);
-                    });
-                    console.log('Done');
-                }, 3000);
-            }
+// This function gets manager details then calls the ask function
+// to get employee details
+function manager() {
+    inquirer
+        .prompt([...managerQuestions])
+        .then((manager) => {
+            const { name, id, email, officeNumber } = manager;
+            team.push(new Manager(name, id, email, officeNumber));
+            ask();
+        })
+        .catch((err) => {
+            console.log(err);
         });
-    });
 }
 
-ask();
+// This function asks for emplayees and gets their details until the user quits.
+// It then calls the render function with team array the render html
+function ask() {
+    inquirer
+        .prompt([employeeChoice])
+        .then((choice) => {
+            let lastQuestion;
+            choice.employee === 'Engineer'
+                ? (lastQuestion = github)
+                : (lastQuestion = school);
+            inquirer
+                .prompt([...questions, lastQuestion, askAgain])
+                .then((answers) => {
+                    let teamMember;
+                    if (choice.employee === 'Engineer') {
+                        const { name, id, email, github } = answers;
+                        teamMember = new Engineer(name, id, email, github);
+                    } else {
+                        const { name, id, email, school } = answers;
+                        teamMember = new Intern(name, id, email, school);
+                    }
+                    team.push(teamMember);
+
+                    if (answers.askAgain) {
+                        ask();
+                    } else {
+                        // Call render function with team array
+                        console.log('Rendering HTML ....');
+                        const output = render(team);
+
+                        // Create File Path
+                        const OUTPUT_DIR = resolve('', 'output');
+                        const outputPath = join(OUTPUT_DIR, 'team.html');
+
+                        // Write team.html file
+                        setTimeout(() => {
+                            fs.outputFile(outputPath, output, (err) => {
+                                if (err) console.log(err);
+                            });
+                            console.log('Done');
+                        }, 2000);
+                    }
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+}
+
+manager();
